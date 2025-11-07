@@ -7,7 +7,10 @@ async function bootstrap() {
 
   // Enable CORS for frontend
   app.enableCors({
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? [process.env.CORS_ORIGIN ?? '']
+        : ['http://localhost:5173', 'http://localhost:3000'],
     credentials: true,
   });
 
